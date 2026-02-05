@@ -1,7 +1,15 @@
+# Node
+node_modules/
+
+# Python
 __pycache__/
+venv/
 .env
-*.pyc
-*.sqlite3
-data/
-models/
+
+# OS
 .DS_Store
+
+# Accidental / tool folders
+backend/python
+
+src/app/data/
