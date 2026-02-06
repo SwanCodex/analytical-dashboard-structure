@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from app.services.market_data import get_market_overview
 from app.services.market_data import get_market_overview
@@ -6,7 +7,16 @@ from app.services.prediction_engine import generate_market_outlook
 from app.services.traceability import generate_traceability_report
 
 app = FastAPI(title="Market Impact Intelligence Engine")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5174",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health_check():
@@ -23,7 +33,6 @@ def overview():
 @app.get("/api/overview")
 def api_overview():
     return get_market_overview()
-
 
 @app.get("/api/event-impact")
 def api_event_impact():
